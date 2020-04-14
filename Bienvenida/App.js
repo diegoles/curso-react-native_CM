@@ -5,29 +5,28 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      nombre: ""
+      nombre: "",
     };
   }
   render() {
-    return(
+    return (
       <View style={styles.container}>
-      <Text>Bienvenido ED !!!!</Text>
-      <TextInput
-        value={this.state.nombre}
-        onChangeText={(txt) => {
-          this.setState({ nombre: txt });
-        }}
-        placeholder="Ingrese nombre:"
-      />
-      <Button
-        title="CLICK ME!"
-        onPress={() => {
-          Alert.alert("HOLA" + this.state.nombre);
-        }}
-      />
-    </View>
+        <Text style={styles.texto}>Bienvenido ED !!!!</Text>
+        <TextInput
+          value={this.state.nombre}
+          onChangeText={(txt) => {
+            this.setState({ nombre: txt });
+          }}
+          placeholder="Ingrese nombre:"
+        />
+        <Button
+          title="CLICK ME!"
+          onPress={() => {
+            Alert.alert("HOLA" + this.state.nombre);
+          }}
+        />
+      </View>
     );
-    
   }
 }
 
@@ -38,4 +37,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  texto:{
+    borderColor: "gray",
+    borderWidth: 1
+  },
+  caja:{
+
+  }
 });
