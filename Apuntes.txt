@@ -1,0 +1,25 @@
+Comandos:
+expo init Calculadora --template blank
+expo start
+npm install
+instalar yarn.
+
+setState: Recibe un objeto
+value: recibe un objeto
+onChangeText: Recibe una función con un paramtero
+onPress: Recibe una función sin parametros
+alert: recibe un String
+return (): Solo puede devolver un elemento, ejemplo un <View> que este puede agrupar varios elementos.
+
+
+rederItem:Recibe una función con un parametro
+this.personas = [{},{},{}];
+<FlatList 
+	data = {personas}
+	renderItem={(obj)=>return <Text></Text>}
+	keyExtractor={(key) => {
+            return key.id + "";=>String
+          }}
+/>
+
+obj--> item/index/separators
