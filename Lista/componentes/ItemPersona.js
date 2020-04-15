@@ -1,17 +1,32 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
 
 export class ItemPersona extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.fila}>
         <Text>
-          Indice - Nombre
+          Indice - Nombre =>
           {this.props.indice} - {this.props.persona.nombre}
         </Text>
 
-        <Text> Telefono: {this.props.persona.telefono}</Text>
+        <Text> Telefono => {this.props.persona.telefono}</Text>
+        <Button
+          title="ELIMINAR"
+          onPress={() => {
+            this.props.fnEliminar(this.props.persona);
+            // Alert.alert("id:" + this.props.persona.id);
+          }}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  fila: {
+    backgroundColor: "gray",
+    borderBottomWidth: 1
+    
+  },
+});
