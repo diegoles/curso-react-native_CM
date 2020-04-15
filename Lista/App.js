@@ -37,6 +37,7 @@ export default class App extends Component {
             });
           }}
           placeholder="Id"
+          keyboardType="numeric"
         />
         <TextInput
           value={this.state.nombrePersona}
@@ -45,7 +46,7 @@ export default class App extends Component {
               nombrePersona: txt,
             });
           }}
-          placeholder="nombrePersona"
+          placeholder="NOMBRE"
         />
         <TextInput
           value={this.state.telefonoPersona}
@@ -54,7 +55,7 @@ export default class App extends Component {
               telefonoPersona: txt,
             });
           }}
-          placeholder="telefonoPersona"
+          placeholder="TELEFONO"
         />
         <Button
           title="GUARDAR"
