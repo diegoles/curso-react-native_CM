@@ -23,3 +23,9 @@ this.personas = [{},{},{}];
 />
 
 obj--> item/index/separators
+
+
+expo install => para instalar dependecias independientemente si utilizamos npm, yarn, etc
+
+yarn add react-native-elements
+expo install react-native-vector-icons

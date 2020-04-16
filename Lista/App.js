@@ -8,7 +8,10 @@ import {
   Button,
   Alert,
 } from "react-native";
+
 import { ItemPersona } from "./componentes/ItemPersona";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Input } from "react-native-elements";
 
 export default class App extends Component {
   constructor() {
@@ -30,7 +33,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Text>LISTA DE PERSONAS</Text>
-        <TextInput
+        <Input
           value={this.state.idPersona}
           onChangeText={(txt) => {
             this.setState({
@@ -39,8 +42,9 @@ export default class App extends Component {
           }}
           placeholder="Id"
           keyboardType="numeric"
+          leftIcon={<Icon name="key" size={24} color="black" />}
         />
-        <TextInput
+        <Input
           value={this.state.nombrePersona}
           onChangeText={(txt) => {
             this.setState({
@@ -48,8 +52,9 @@ export default class App extends Component {
             });
           }}
           placeholder="NOMBRE"
+          leftIcon={<Icon name="user" size={24} color="black" />}
         />
-        <TextInput
+        <Input
           value={this.state.telefonoPersona}
           onChangeText={(txt) => {
             this.setState({
@@ -58,6 +63,7 @@ export default class App extends Component {
           }}
           placeholder="TELEFONO"
           keyboardType="numeric"
+          leftIcon={<Icon name="phone" size={24} color="black" />}
         />
 
         {!this.state.actualizar && (
