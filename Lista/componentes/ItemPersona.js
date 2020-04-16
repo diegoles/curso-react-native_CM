@@ -18,6 +18,10 @@ export class ItemPersona extends Component {
             // Alert.alert("id:" + this.props.persona.id);
           }}
         />
+
+        <Button title="SELECCIONAR" onPress={()=>{
+          this.props.fnSeleccionar(this.props.persona)
+        }}/>
       </View>
     );
   }

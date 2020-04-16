@@ -23,6 +23,7 @@ export default class App extends Component {
       idPersona: "",
       nombrePersona: "",
       telefonoPersona: "",
+      actualizar: false,
     };
   }
   render() {
@@ -56,17 +57,35 @@ export default class App extends Component {
             });
           }}
           placeholder="TELEFONO"
+          keyboardType="numeric"
         />
-        <Button
-          title="GUARDAR"
-          onPress={() => {
-            this.agregar({
-              id: this.state.idPersona,
-              nombre: this.state.nombrePersona,
-              telefono: this.state.telefonoPersona
-            });
-          }}
-        ></Button>
+
+        {!this.state.actualizar && (
+          <Button
+            title="GUARDAR"
+            onPress={() => {
+              this.agregar({
+                id: this.state.idPersona,
+                nombre: this.state.nombrePersona,
+                telefono: this.state.telefonoPersona,
+              });
+            }}
+          />
+        )}
+
+        {this.state.actualizar && (
+          <Button
+            title="ACTUALIZAR"
+            onPress={() => {
+              this.actualizarPersona({
+                id: this.state.idPersona,
+                nombre: this.state.nombrePersona,
+                telefono: this.state.telefonoPersona,
+              });
+            }}
+          />
+        )}
+
         <FlatList
           data={this.state.listaPersonas}
           keyExtractor={(key) => {
@@ -81,6 +100,7 @@ export default class App extends Component {
                   indice={obj.index}
                   persona={obj.item}
                   fnEliminar={this.eliminar}
+                  fnSeleccionar={this.seleccionar}
                 />
               </View>
             );
@@ -101,6 +121,39 @@ export default class App extends Component {
     });
   };
 
+  seleccionar = (p) => {
+    if (this.buscar(p) != -1) {
+      this.setState({
+        idPersona: p.id,
+        nombrePersona: p.nombre,
+        telefonoPersona: p.telefono,
+      });
+      this.cambiarEstadoActualizar();
+    }
+  };
+
+  actualizarPersona = (p) => {
+    let indice = this.buscar(p);
+    if (indice != -1) {
+      this.personas[indice].nombre = p.nombre;
+      this.personas[indice].telefono = p.telefono;
+
+      this.setState({
+        listaPersonas: this.personas,
+      });
+      this.cambiarEstadoActualizar();
+      this.limpiar();
+    } else {
+      Alert.alert("La persona no existe");
+    }
+  };
+
+  cambiarEstadoActualizar = () => {
+    this.setState({
+      actualizar: !this.state.actualizar,
+    });
+  };
+
   buscar = (p) => {
     let indice = -1;
 
@@ -118,13 +171,19 @@ export default class App extends Component {
       this.personas.push(p);
       this.setState({
         listaPersonas: this.personas,
-        idPersona:"",
-        nombrePersona:"",
-        telefonoPersona:""
       });
+      this.limpiar();
     } else {
       Alert.alert("La persona ya existe");
     }
+  };
+
+  limpiar = () => {
+    this.setState({
+      idPersona: "",
+      nombrePersona: "",
+      telefonoPersona: "",
+    });
   };
 }
 
@@ -135,7 +194,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
     marginTop: 40,
-    marginLeft:10,
-    marginRight:10
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
