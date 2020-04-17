@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { Avatar } from "react-native-elements";
+import {imagenes} from "./ServicioImagenes";
 
 export class ItemPersona extends Component {
   render() {
@@ -7,6 +9,11 @@ export class ItemPersona extends Component {
     const { nombre, telefono } = persona;
     return (
       <View style={styles.fila}>
+        <Avatar
+          rounded
+          title={nombre.substring(0, 1)}
+          source={imagenes[indice]}
+        />
         <Text>
           Indice - Nombre =>
           {indice} - {nombre}
@@ -17,7 +24,7 @@ export class ItemPersona extends Component {
           title="ELIMINAR"
           onPress={() => {
             fnEliminar(persona);
-            // Alert.alert("id:" + .persona.id);
+            // Alert.alert("id:" + persona.id);
           }}
         />
 
