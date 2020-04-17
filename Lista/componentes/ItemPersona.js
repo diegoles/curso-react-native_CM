@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 export class ItemPersona extends Component {
   render() {
+    const { persona, indice, fnEliminar, fnSeleccionar } = this.props;
+    const { nombre, telefono } = persona;
     return (
       <View style={styles.fila}>
         <Text>
           Indice - Nombre =>
-          {this.props.indice} - {this.props.persona.nombre}
+          {indice} - {nombre}
         </Text>
 
-        <Text> Telefono => {this.props.persona.telefono}</Text>
+        <Text> Telefono => {telefono}</Text>
         <Button
           title="ELIMINAR"
           onPress={() => {
-            this.props.fnEliminar(this.props.persona);
-            // Alert.alert("id:" + this.props.persona.id);
+            fnEliminar(persona);
+            // Alert.alert("id:" + .persona.id);
           }}
         />
 
-        <Button title="SELECCIONAR" onPress={()=>{
-          this.props.fnSeleccionar(this.props.persona)
-        }}/>
+        <Button
+          title="SELECCIONAR"
+          onPress={() => {
+            fnSeleccionar(persona);
+          }}
+        />
       </View>
     );
   }
@@ -30,7 +35,6 @@ export class ItemPersona extends Component {
 const styles = StyleSheet.create({
   fila: {
     backgroundColor: "gray",
-    borderBottomWidth: 1
-    
+    borderBottomWidth: 1,
   },
 });

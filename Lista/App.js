@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TextInput,
-  Button,
-  Alert,
-} from "react-native";
-
-import { ItemPersona } from "./componentes/ItemPersona";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Alert, Button, FlatList, StyleSheet, Text, View } from "react-native";
 import { Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { ItemPersona } from "./componentes/ItemPersona";
 
 export default class App extends Component {
   constructor() {
@@ -94,30 +85,26 @@ export default class App extends Component {
 
         <FlatList
           data={this.state.listaPersonas}
-          keyExtractor={(key) => {
-            return key.id + "";
-          }}
-          renderItem={(obj) => {
-            return (
-              <View>
-                {/* <Text> {obj.index} - {obj.item.nombre} </Text>
+          keyExtractor={(key) => key.id + ""}
+          renderItem={({ index, item }) => (
+            <View>
+              {/* <Text> {obj.index} - {obj.item.nombre} </Text>
                 <Text>{obj.item.telefono}</Text> */}
-                <ItemPersona
-                  indice={obj.index}
-                  persona={obj.item}
-                  fnEliminar={this.eliminar}
-                  fnSeleccionar={this.seleccionar}
-                />
-              </View>
-            );
-          }}
+              <ItemPersona
+                indice={index}
+                persona={item}
+                fnEliminar={this.eliminar}
+                fnSeleccionar={this.seleccionar}
+              />
+            </View>
+          )}
         />
       </View>
     );
   }
 
-  eliminar = (p) => {
-    let indice = this.buscar(p);
+  eliminar = ({ id }) => {
+    let indice = this.buscar({ id });
 
     if (indice != -1) {
       this.personas.splice(indice, 1);
@@ -127,12 +114,12 @@ export default class App extends Component {
     });
   };
 
-  seleccionar = (p) => {
-    if (this.buscar(p) != -1) {
+  seleccionar = ({ id, nombre, telefono }) => {
+    if (this.buscar({ id }) != -1) {
       this.setState({
-        idPersona: p.id,
-        nombrePersona: p.nombre,
-        telefonoPersona: p.telefono,
+        idPersona: id,
+        nombrePersona: nombre,
+        telefonoPersona: telefono,
       });
       this.cambiarEstadoActualizar();
     }
@@ -160,11 +147,11 @@ export default class App extends Component {
     });
   };
 
-  buscar = (p) => {
+  buscar = ({ id }) => {
     let indice = -1;
 
     for (let i = 0; i < this.personas.length; i++) {
-      if (this.personas[i].id === p.id) {
+      if (this.personas[i].id === id) {
         indice = i;
         break;
       }
